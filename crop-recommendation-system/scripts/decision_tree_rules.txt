@@ -1,0 +1,28 @@
+|--- P <= 1.59
+|   |--- K <= 0.39
+|   |   |--- humidity <= -2.02
+|   |   |   |--- temp_humidity_index <= -0.48
+|   |   |   |   |--- class: 18
+|   |   |   |--- temp_humidity_index >  -0.48
+|   |   |   |   |--- NP_ratio <= -0.01
+|   |   |   |   |   |--- class: 9
+|   |   |   |   |--- NP_ratio >  -0.01
+|   |   |   |   |   |--- class: 9
+|   |   |--- humidity >  -2.02
+|   |   |   |--- humidity <= 0.09
+|   |   |   |   |--- N <= 0.25
+|   |   |   |   |   |--- truncated branch of depth 8
+|   |   |   |   |--- N >  0.25
+|   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |--- humidity >  0.09
+|   |   |   |   |--- NPK_sum <= -0.43
+|   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |   |--- NPK_sum >  -0.43
+|   |   |   |   |   |--- truncated branch of depth 11
+|   |--- K >  0.39
+|   |   |--- class: 3
+|--- P >  1.59
+|   |--- humidity <= 0.69
+|   |   |--- class: 7
+|   |--- humidity >  0.69
+|   |   |--- class: 0

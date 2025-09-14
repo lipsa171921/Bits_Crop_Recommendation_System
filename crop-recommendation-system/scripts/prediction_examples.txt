@@ -1,0 +1,409 @@
+CROP RECOMMENDATION PREDICTION EXAMPLES
+Model: Random Forest
+============================================================
+
+Example 1:
+Actual Crop: maize
+Predicted Crop: maize
+Correct: True
+Features:
+  N: 1.186
+  P: 0.021
+  K: -0.616
+  temperature: -0.447
+  humidity: -0.437
+  ph: -0.808
+  rainfall: 0.070
+  NPK_sum: 0.306
+  NP_ratio: 0.139
+  NK_ratio: -0.019
+  PK_ratio: -0.012
+  temp_humidity_index: -0.009
+  rainfall_humidity_index: -0.161
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  maize: 0.945
+  cotton: 0.045
+  coffee: 0.010
+
+----------------------------------------
+
+Example 2:
+Actual Crop: mungbean
+Predicted Crop: mungbean
+Correct: True
+Features:
+  N: -0.694
+  P: -0.532
+  K: -0.593
+  temperature: 0.614
+  humidity: 0.721
+  ph: 0.236
+  rainfall: -1.043
+  NPK_sum: -0.943
+  NP_ratio: -0.002
+  NK_ratio: -0.000
+  PK_ratio: -0.007
+  temp_humidity_index: 0.202
+  rainfall_humidity_index: -1.088
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  mungbean: 0.993
+  orange: 0.007
+  watermelon: 0.000
+
+----------------------------------------
+
+Example 3:
+Actual Crop: papaya
+Predicted Crop: papaya
+Correct: True
+Features:
+  N: -0.145
+  P: -0.029
+  K: -0.062
+  temperature: 3.102
+  humidity: 0.948
+  ph: 0.246
+  rainfall: 0.989
+  NPK_sum: -0.122
+  NP_ratio: 0.007
+  NK_ratio: 0.007
+  PK_ratio: -0.009
+  temp_humidity_index: 2.327
+  rainfall_humidity_index: 1.088
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  papaya: 0.968
+  rice: 0.012
+  coconut: 0.010
+
+----------------------------------------
+
+Example 4:
+Actual Crop: apple
+Predicted Crop: apple
+Correct: True
+Features:
+  N: -1.298
+  P: 2.674
+  K: 2.941
+  temperature: -0.733
+  humidity: 0.887
+  ph: -0.441
+  rainfall: 0.220
+  NPK_sum: 2.239
+  NP_ratio: -0.007
+  NK_ratio: -0.010
+  PK_ratio: -0.007
+  temp_humidity_index: -0.728
+  rainfall_humidity_index: 0.131
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  apple: 1.000
+  rice: 0.000
+  banana: 0.000
+
+----------------------------------------
+
+Example 5:
+Actual Crop: blackgram
+Predicted Crop: blackgram
+Correct: True
+Features:
+  N: -0.360
+  P: 0.622
+  K: -0.661
+  temperature: 0.998
+  humidity: -0.392
+  ph: 1.088
+  rainfall: -0.639
+  NPK_sum: -0.207
+  NP_ratio: -0.007
+  NK_ratio: -0.004
+  PK_ratio: -0.017
+  temp_humidity_index: -0.507
+  rainfall_humidity_index: 0.200
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  blackgram: 0.993
+  lentil: 0.007
+  rice: 0.000
+
+----------------------------------------
+
+Example 6:
+Actual Crop: grapes
+Predicted Crop: grapes
+Correct: True
+Features:
+  N: -0.410
+  P: 2.630
+  K: 3.013
+  temperature: -3.361
+  humidity: 0.490
+  ph: -0.699
+  rainfall: -0.665
+  NPK_sum: 2.714
+  NP_ratio: -0.006
+  NK_ratio: -0.008
+  PK_ratio: -0.007
+  temp_humidity_index: -1.576
+  rainfall_humidity_index: -0.540
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  grapes: 0.990
+  apple: 0.010
+  rice: 0.000
+
+----------------------------------------
+
+Example 7:
+Actual Crop: mothbeans
+Predicted Crop: mothbeans
+Correct: True
+Features:
+  N: -1.019
+  P: -0.179
+  K: -0.516
+  temperature: 0.229
+  humidity: -1.116
+  ph: 4.298
+  rainfall: -0.605
+  NPK_sum: -0.889
+  NP_ratio: 0.009
+  NK_ratio: 0.005
+  PK_ratio: -0.010
+  temp_humidity_index: -0.392
+  rainfall_humidity_index: 0.746
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  mothbeans: 1.000
+  watermelon: 0.000
+  kidneybeans: 0.000
+
+----------------------------------------
+
+Example 8:
+Actual Crop: coffee
+Predicted Crop: coffee
+Correct: True
+Features:
+  N: 1.323
+  P: -1.046
+  K: -0.300
+  temperature: 0.394
+  humidity: -0.718
+  ph: -0.264
+  rainfall: 0.498
+  NPK_sum: -0.012
+  NP_ratio: -0.009
+  NK_ratio: -0.034
+  PK_ratio: 0.008
+  temp_humidity_index: -0.415
+  rainfall_humidity_index: -0.581
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  coffee: 1.000
+  watermelon: 0.000
+  rice: 0.000
+
+----------------------------------------
+
+Example 9:
+Actual Crop: coconut
+Predicted Crop: coconut
+Correct: True
+Features:
+  N: -0.785
+  P: -1.055
+  K: -0.447
+  temperature: 0.335
+  humidity: 1.013
+  ph: 0.292
+  rainfall: 1.458
+  NPK_sum: -1.185
+  NP_ratio: -0.004
+  NK_ratio: 0.003
+  PK_ratio: 0.001
+  temp_humidity_index: 0.114
+  rainfall_humidity_index: 1.781
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  coconut: 0.924
+  orange: 0.047
+  mungbean: 0.012
+
+----------------------------------------
+
+Example 10:
+Actual Crop: mothbeans
+Predicted Crop: mothbeans
+Correct: True
+Features:
+  N: -0.694
+  P: -0.450
+  K: -0.554
+  temperature: 0.626
+  humidity: -0.903
+  ph: -1.172
+  rainfall: -1.161
+  NPK_sum: -0.881
+  NP_ratio: -0.002
+  NK_ratio: 0.000
+  PK_ratio: -0.007
+  temp_humidity_index: -0.655
+  rainfall_humidity_index: 1.225
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  mothbeans: 1.000
+  watermelon: 0.000
+  kidneybeans: 0.000
+
+----------------------------------------
+
+Example 11:
+Actual Crop: banana
+Predicted Crop: banana
+Correct: True
+Features:
+  N: 1.077
+  P: 1.180
+  K: 0.135
+  temperature: 0.287
+  humidity: 0.394
+  ph: -0.452
+  rainfall: -0.114
+  NPK_sum: 1.240
+  NP_ratio: -0.003
+  NK_ratio: 0.040
+  PK_ratio: 0.037
+  temp_humidity_index: -0.079
+  rainfall_humidity_index: -0.178
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  banana: 1.000
+  watermelon: 0.000
+  rice: 0.000
+
+----------------------------------------
+
+Example 12:
+Actual Crop: apple
+Predicted Crop: apple
+Correct: True
+Features:
+  N: -1.135
+  P: 2.613
+  K: 2.980
+  temperature: -0.475
+  humidity: 1.040
+  ph: -0.814
+  rainfall: 0.034
+  NPK_sum: 2.312
+  NP_ratio: -0.007
+  NK_ratio: -0.010
+  PK_ratio: -0.007
+  temp_humidity_index: -0.596
+  rainfall_humidity_index: -0.074
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  apple: 1.000
+  rice: 0.000
+  banana: 0.000
+
+----------------------------------------
+
+Example 13:
+Actual Crop: mango
+Predicted Crop: mango
+Correct: True
+Features:
+  N: -0.745
+  P: -0.834
+  K: -0.430
+  temperature: 0.607
+  humidity: -0.987
+  ph: -1.598
+  rainfall: -0.251
+  NPK_sum: -1.042
+  NP_ratio: -0.003
+  NK_ratio: 0.003
+  PK_ratio: -0.001
+  temp_humidity_index: -0.684
+  rainfall_humidity_index: 0.196
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  mango: 1.000
+  watermelon: 0.000
+  kidneybeans: 0.000
+
+----------------------------------------
+
+Example 14:
+Actual Crop: mothbeans
+Predicted Crop: mothbeans
+Correct: True
+Features:
+  N: -0.706
+  P: -0.624
+  K: -0.482
+  temperature: 1.181
+  humidity: -1.034
+  ph: 0.619
+  rainfall: -1.163
+  NPK_sum: -0.939
+  NP_ratio: -0.003
+  NK_ratio: 0.001
+  PK_ratio: -0.004
+  temp_humidity_index: -1.213
+  rainfall_humidity_index: 1.424
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  mothbeans: 0.826
+  mango: 0.131
+  coconut: 0.020
+
+----------------------------------------
+
+Example 15:
+Actual Crop: rice
+Predicted Crop: rice
+Correct: True
+Features:
+  N: 1.159
+  P: -0.009
+  K: -0.201
+  temperature: 0.271
+  humidity: 0.472
+  ph: 0.811
+  rainfall: 3.435
+  NPK_sum: 0.492
+  NP_ratio: -0.333
+  NK_ratio: -0.042
+  PK_ratio: -0.011
+  temp_humidity_index: -0.066
+  rainfall_humidity_index: 1.965
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  rice: 0.991
+  jute: 0.009
+  watermelon: 0.000
+
+----------------------------------------
+
