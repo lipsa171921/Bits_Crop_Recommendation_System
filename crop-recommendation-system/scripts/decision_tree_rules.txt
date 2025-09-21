@@ -1,28 +1,52 @@
-|--- P <= 1.59
-|   |--- K <= 0.39
-|   |   |--- humidity <= -2.02
-|   |   |   |--- temp_humidity_index <= -0.48
-|   |   |   |   |--- class: 18
-|   |   |   |--- temp_humidity_index >  -0.48
-|   |   |   |   |--- NP_ratio <= -0.01
-|   |   |   |   |   |--- class: 9
-|   |   |   |   |--- NP_ratio >  -0.01
-|   |   |   |   |   |--- class: 9
-|   |   |--- humidity >  -2.02
-|   |   |   |--- humidity <= 0.09
-|   |   |   |   |--- N <= 0.25
-|   |   |   |   |   |--- truncated branch of depth 8
-|   |   |   |   |--- N >  0.25
+|--- NK_ratio <= -1.37
+|   |--- PK_ratio <= 2.07
+|   |   |--- rainfall <= -0.27
+|   |   |   |--- rainfall <= -1.01
+|   |   |   |   |--- rainfall <= -1.04
 |   |   |   |   |   |--- truncated branch of depth 5
-|   |   |   |--- humidity >  0.09
-|   |   |   |   |--- NPK_sum <= -0.43
-|   |   |   |   |   |--- truncated branch of depth 5
-|   |   |   |   |--- NPK_sum >  -0.43
+|   |   |   |   |--- rainfall >  -1.04
+|   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |--- rainfall >  -1.01
+|   |   |   |   |--- rainfall <= -0.82
+|   |   |   |   |   |--- truncated branch of depth 10
+|   |   |   |   |--- rainfall >  -0.82
 |   |   |   |   |   |--- truncated branch of depth 11
-|   |--- K >  0.39
-|   |   |--- class: 3
-|--- P >  1.59
-|   |--- humidity <= 0.69
-|   |   |--- class: 7
-|   |--- humidity >  0.69
-|   |   |--- class: 0
+|   |   |--- rainfall >  -0.27
+|   |   |   |--- rainfall <= 1.49
+|   |   |   |   |--- rainfall <= -0.00
+|   |   |   |   |   |--- truncated branch of depth 11
+|   |   |   |   |--- rainfall >  -0.00
+|   |   |   |   |   |--- truncated branch of depth 11
+|   |   |   |--- rainfall >  1.49
+|   |   |   |   |--- temperature <= 0.16
+|   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |--- temperature >  0.16
+|   |   |   |   |   |--- truncated branch of depth 9
+|   |--- PK_ratio >  2.07
+|   |   |--- NP_ratio <= -0.21
+|   |   |   |--- NP_ratio <= -0.27
+|   |   |   |   |--- class: 30
+|   |   |   |--- NP_ratio >  -0.27
+|   |   |   |   |--- class: 6
+|   |   |--- NP_ratio >  -0.21
+|   |   |   |--- class: 20
+|--- NK_ratio >  -1.37
+|   |--- NP_ratio <= 1.72
+|   |   |--- NK_ratio <= -0.10
+|   |   |   |--- NK_ratio <= -0.16
+|   |   |   |   |--- NK_ratio <= -0.28
+|   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |--- NK_ratio >  -0.28
+|   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |--- NK_ratio >  -0.16
+|   |   |   |   |--- class: 21
+|   |   |--- NK_ratio >  -0.10
+|   |   |   |--- N <= 2.43
+|   |   |   |   |--- N <= 0.93
+|   |   |   |   |   |--- truncated branch of depth 11
+|   |   |   |   |--- N >  0.93
+|   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |--- N >  2.43
+|   |   |   |   |--- class: 28
+|   |--- NP_ratio >  1.72
+|   |   |--- class: 23

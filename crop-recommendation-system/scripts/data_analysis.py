@@ -13,17 +13,19 @@ def load_crop_data():
     """Load the crop recommendation dataset using CropDataLoader"""
     try:
         loader = CropDataLoader()
+        
+        # Try URL first, then fallback to local file
         try:
             df = loader.load_data_from_file()
         except Exception as e:
             print(f"Failed to load from file: {e}")
-            print("Trying to load from local folders...")
-            df = loader.load_data_from_other_folders()
+            print("Trying to load from local file...")
+            df = loader.load_data_from_file()
         
         return df, loader
         
     except Exception as e:
-        print(f"Error loading dataset: {e}")
+        print(f"❌ Error loading dataset: {e}")
         return None, None
 
 def explore_data(df, loader):

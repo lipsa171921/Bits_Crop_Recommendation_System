@@ -15,8 +15,8 @@ def create_feature_combinations(df):
     df['PK_ratio'] = df['P'] / (df['K'] + 1e-8)
     
     # Create climate comfort indices
-    df['temp_humidity_index'] = df['temperature'] * df['humidity'] / 100
-    df['rainfall_humidity_index'] = df['rainfall'] * df['humidity'] / 100
+    # df['temp_humidity_index'] = df['temperature'] * df['humidity'] / 100
+    # df['rainfall_humidity_index'] = df['rainfall'] * df['humidity'] / 100
     
     # Create soil quality indicators
     df['ph_category'] = pd.cut(df['ph'], bins=[0, 6.0, 7.5, 14], labels=['acidic', 'neutral', 'alkaline'])
@@ -152,6 +152,7 @@ def main():
     print("\nFeature Engineering completed successfully!")
     print(f"Final feature set: {len(selected_features)} features")
     print(f"Selected features: {selected_features}")
+
 
 if __name__ == "__main__":
     main()
