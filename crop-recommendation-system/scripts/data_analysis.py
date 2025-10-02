@@ -9,25 +9,38 @@ import io
 import pickle
 from data_loader import CropDataLoader
 
-def load_crop_data():
+def load_crop_data_combined():
     """Load the crop recommendation dataset using CropDataLoader"""
     try:
-        loader = CropDataLoader()
-        try:
-            df = loader.load_data_from_file()
-        except Exception as e:
-            print(f"Failed to load from file: {e}")
-            print("Trying to load from local folders...")
-            df = loader.load_data_from_other_folders()
-        
-        return df, loader
-        
+        loader = CropDataLoader(train_csv="train.csv", test_csv="test.csv")
+
+        # Load both datasets
+        train_df, test_df, combined_df = loader.load_both_datasets()
+        print("Both train and test datasets loaded successfully.")
+
+        return combined_df, loader  # use combined_df for EDA
+
     except Exception as e:
         print(f"Error loading dataset: {e}")
         return None, None
 
+def load_crop_data():
+    """Load the crop recommendation dataset using CropDataLoader"""
+    try:
+        loader = CropDataLoader()
+
+        # Load both datasets
+        df = loader.load_data_from_file()
+        print("✅Datasets loaded successfully.")
+
+        return df, loader  # use combined_df for EDA
+
+    except Exception as e:
+        print(f"Error loading dataset: {e}")
+        return None, None
 def explore_data(df, loader):
     """Perform exploratory data analysis"""
+    print("\n=== Perform Exploratory data analysis ===")
     print("\n=== DATASET OVERVIEW ===")
     print(df.head())
     print(f"\nDataset Info:")
@@ -38,6 +51,12 @@ def explore_data(df, loader):
     
     print(f"\nMissing Values:")
     print(df.isnull().sum())
+
+    print(f"\nRemove Duplicate Rows:")
+    before = df.shape[0]
+    df.drop_duplicates(inplace=True)
+    after = df.shape[0]
+    print(f"\nRemoved {before - after} duplicate rows. Final dataset size: {after}")
     
     print(f"\nCrop Distribution:")
     print(df[loader.target_column].value_counts())
@@ -51,6 +70,7 @@ def explore_data(df, loader):
 
 def visualize_data(df, loader):
     """Create visualizations for the dataset"""
+
     plt.style.use('default')
     
     # Set up the plotting area

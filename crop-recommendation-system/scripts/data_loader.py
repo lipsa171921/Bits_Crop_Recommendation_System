@@ -8,39 +8,51 @@ import requests
 import io
 
 class CropDataLoader:
-    def __init__(self, csv_file="Crop_recommendation.csv"):
+    def __init__(self, 
+                 train_csv="train.csv",
+                 test_csv="test.csv"):
         self.scaler = StandardScaler()
         self.label_encoder = LabelEncoder()
-        self.csv_file = csv_file
-        self.feature_names = []
-        self.target_column = None
-        self.target_classes = []
+        self.train_csv = train_csv
+        self.test_csv = test_csv
+        self.feature_names = []  # Will be auto-detected
+        self.target_column = None  # Will be auto-detected
+        self.target_classes = []  # Will be auto-detected
+        
+    def load_data_from_file(self, use_test_data=False):
+        """Load dataset from file - supports both train and test datasets"""
+        data_file = self.test_csv if use_test_data else self.train_csv
+        dataset_type = "test" if use_test_data else "train"
 
-    def load_data_from_file(self):
-        """Load dataset from file"""
         try:
+            print(f"Fetching {dataset_type} dataset from file...")
+
             # Read CSV file
-            df = pd.read_csv(self.csv_file)
+            df = pd.read_csv(data_file)
 
-            print(f"✅ Dataset loaded successfully! Shape: {df.shape}")
+            print(f"Dataset loaded successfully! Shape: {df.shape}")
             print(f"Columns: {df.columns.tolist()}")
+            
+            print(f"{dataset_type.title()} dataset loaded successfully! Shape: {df.shape}")
+            print(f"Columns: {df.columns.tolist()}")
+            
+            # Auto-detect target column (assume it's the first column named 'label')
 
-            # Auto-detect target column (assume it's the last column or named 'label')
             if 'label' in df.columns:
                 self.target_column = 'label'
             else:
                 self.target_column = df.columns[-1]  # Last column as target
-
+            
             # Auto-detect feature columns (all except target)
             self.feature_names = [col for col in df.columns if col != self.target_column]
-
+            
             # Auto-detect target classes
             self.target_classes = sorted(df[self.target_column].unique())
-
+            
             print(f"Target column: {self.target_column}")
             print(f"Feature columns: {self.feature_names}")
             print(f"Target classes ({len(self.target_classes)}): {self.target_classes}")
-
+            
             for col in self.feature_names:
                 if df[col].dtype == 'object':
                     try:
@@ -48,109 +60,89 @@ class CropDataLoader:
                         print(f"Converted {col} to numeric")
                     except:
                         print(f"Could not convert {col} to numeric - keeping as categorical")
-
+            
             return df
 
         except Exception as e:
-            error_msg = f"Error processing dataset: {e}\nPlease ensure the CSV file is valid."
-            raise RuntimeError(error_msg)
-
-    def load_data_from_other_folders(self, csv_filename="Crop_recommendation.csv"):
-        """Load dataset from other folders if available"""
-        try:
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            possible_paths = [
-                os.path.join(script_dir, csv_filename),
-                os.path.join(script_dir, "..", csv_filename),
-                os.path.join(script_dir, "data", csv_filename),
-                csv_filename  # Current directory
-            ]
-            
-            csv_path = None
-            for path in possible_paths:
-                if os.path.exists(path):
-                    csv_path = path
-                    break
-            
-            if csv_path is None:
-                raise FileNotFoundError(
-                    f"CSV file '{csv_filename}' not found in any of these locations:\n" +
-                    "\n".join([f"  - {path}" for path in possible_paths]) +
-                    f"\n\nPlease place the '{csv_filename}' file in the scripts folder."
-                )
-            
-            print(f"Loading dataset from: {csv_path}")
-            df = pd.read_csv(csv_path)
-            
-            print(f"Dataset loaded successfully! Shape: {df.shape}")
-            print(f"Columns: {df.columns.tolist()}")
-            
-            # Auto-detect target column (assume it's the last column or named 'label')
-            if 'label' in df.columns:
-                self.target_column = 'label'
-            else:
-                self.target_column = df.columns[-1]  # Last column as target
-            
-            # Auto-detect feature columns (all except target)
-            self.feature_names = [col for col in df.columns if col != self.target_column]
-            
-            # Auto-detect target classes
-            self.target_classes = sorted(df[self.target_column].unique())
-            
-            print(f"Target column: {self.target_column}")
-            print(f"Feature columns: {self.feature_names}")
-            print(f"Target classes ({len(self.target_classes)}): {self.target_classes}")
-            
-            for col in self.feature_names:
-                if df[col].dtype == 'object':
-                    try:
-                        df[col] = pd.to_numeric(df[col], errors='coerce')
-                        print(f"✅ Converted {col} to numeric")
-                    except:
-                        print(f"⚠️ Could not convert {col} to numeric - keeping as categorical")
-            
-            return df
-            
-        except FileNotFoundError as e:
-            raise e
-        except Exception as e:
-            error_msg = f"Error processing dataset: {e}\nPlease ensure the CSV file is valid."
+            error_msg = f"Error processing {dataset_type} dataset: {e}\nPlease ensure the CSV file is valid."
             raise RuntimeError(error_msg)
     
-    def preprocess_data(self, df):
-        """Preprocess the dataset"""
+    def load_both_datasets(self):
+        """Load both train and test datasets"""
+        try:
+            print("📥 Loading both train and test datasets...")
+            train_df = self.load_data_from_file(use_test_data=False)
+            test_df = self.load_data_from_file(use_test_data=True)
+            
+            # Combine for overall statistics but keep separate for proper ML evaluation
+            combined_df = pd.concat([train_df, test_df], ignore_index=True)
+            
+            print(f"Combined dataset shape: {combined_df.shape}")
+            print(f"Train: {train_df.shape}, Test: {test_df.shape}")
+            
+            return train_df, test_df, combined_df
+            
+        except Exception as e:
+            print(f"Error loading datasets: {e}")
+            print("Falling back to single dataset approach...")
+            # Fallback to single dataset
+            df = self.load_data_from_file(use_test_data=False)
+            return df, None, df
+    
+    def preprocess_data(self, df, test_df=None):
+        """Preprocess the dataset - supports separate train/test datasets"""
+
         missing_cols = [col for col in self.feature_names + [self.target_column] if col not in df.columns]
         if missing_cols:
             raise ValueError(f"Missing required columns: {missing_cols}")
         
         df_clean = df.dropna()
-        print(f"Removed {len(df) - len(df_clean)} rows with missing values")
+        print(f"Removed {len(df) - len(df_clean)} rows with missing values from training data")
         
-        X = df_clean[self.feature_names].copy()
-        y = df_clean[self.target_column].copy()
+        X_train = df_clean[self.feature_names].copy()
+        y_train = df_clean[self.target_column].copy()
         
-        categorical_features = X.select_dtypes(include=['object']).columns
+        # Handle test data if provided separately
+        if test_df is not None:
+            test_df_clean = test_df.dropna()
+            print(f"Removed {len(test_df) - len(test_df_clean)} rows with missing values from test data")
+            X_test = test_df_clean[self.feature_names].copy()
+            y_test = test_df_clean[self.target_column].copy()
+        else:
+            # Split training data if no separate test set
+            X_train, X_test, y_train, y_test = train_test_split(
+                X_train, y_train, test_size=0.2, random_state=42, stratify=y_train
+            )
+        
+        # Handle categorical features
+        categorical_features = X_train.select_dtypes(include=['object']).columns
         if len(categorical_features) > 0:
             print(f"Found categorical features: {categorical_features.tolist()}")
-            # For now, we'll encode categorical features as numeric
             for col in categorical_features:
                 le = LabelEncoder()
-                X[col] = le.fit_transform(X[col].astype(str))
+                X_train[col] = le.fit_transform(X_train[col].astype(str))
+                X_test[col] = le.transform(X_test[col].astype(str))
         
-        y_encoded = self.label_encoder.fit_transform(y)
+        # Encode target labels
+        y_train_encoded = self.label_encoder.fit_transform(y_train)
+        y_test_encoded = self.label_encoder.transform(y_test)
         
-        numeric_features = X.select_dtypes(include=[np.number]).columns
+        # Scale numeric features
+        numeric_features = X_train.select_dtypes(include=[np.number]).columns
         if len(numeric_features) > 0:
-            X_scaled = X.copy()
-            X_scaled[numeric_features] = self.scaler.fit_transform(X[numeric_features])
+            X_train_scaled = X_train.copy()
+            X_test_scaled = X_test.copy()
+            X_train_scaled[numeric_features] = self.scaler.fit_transform(X_train[numeric_features])
+            X_test_scaled[numeric_features] = self.scaler.transform(X_test[numeric_features])
         else:
-            X_scaled = X.copy()
+            X_train_scaled = X_train.copy()
+            X_test_scaled = X_test.copy()
         
-        X_train, X_test, y_train, y_test = train_test_split(
-            X_scaled, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded
-        )
+        # Combine scaled data for compatibility
+        X_scaled = pd.concat([X_train_scaled, X_test_scaled], ignore_index=True)
+        y_encoded = np.concatenate([y_train_encoded, y_test_encoded])
         
-        return X_train, X_test, y_train, y_test, X_scaled, y_encoded
+        return X_train_scaled, X_test_scaled, y_train_encoded, y_test_encoded, X_scaled, y_encoded
     
     def get_crop_info(self):
         """Get dynamic crop information based on detected classes"""
@@ -227,17 +219,3 @@ class CropDataLoader:
         
         return feature_info
 
-@st.cache_data
-def load_and_preprocess_data(csv_file="Crop_recommendation.csv"):
-    """Load and preprocess data with caching for Streamlit"""
-    loader = CropDataLoader(csv_file)
-
-    try:
-        df = loader.load_data_from_file()
-    except Exception as e:
-        print(f"Failed to load from file: {e}")
-        print("Trying to load from local folders...")
-        df = loader.load_data_from_other_folders()
-    
-    X_train, X_test, y_train, y_test, X_scaled, y_encoded = loader.preprocess_data(df)
-    return loader, df, X_train, X_test, y_train, y_test, X_scaled, y_encoded

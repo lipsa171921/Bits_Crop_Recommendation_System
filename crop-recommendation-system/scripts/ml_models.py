@@ -26,9 +26,17 @@ class CropRecommendationModels:
         
     def initialize_models(self):
         """Initialize all ML models with optimized parameters"""
+
         print("Initializing ML models...")
         
         self.models = {
+            'Logistic Regression': LogisticRegression(
+                max_iter=1000,
+                random_state=42,
+                multi_class='ovr',
+                solver='liblinear'
+            ),
+
             'Random Forest': RandomForestClassifier(
                 n_estimators=100,
                 max_depth=20,
@@ -45,13 +53,7 @@ class CropRecommendationModels:
                 random_state=42,
                 probability=True
             ),
-            
-            'Logistic Regression': LogisticRegression(
-                max_iter=1000,
-                random_state=42,
-                multi_class='ovr',
-                solver='liblinear'
-            ),
+
             
             'Decision Tree': DecisionTreeClassifier(
                 max_depth=15,
@@ -65,14 +67,13 @@ class CropRecommendationModels:
                 weights='distance',
                 metric='euclidean'
             ),
-            
             'Gradient Boosting': GradientBoostingClassifier(
                 n_estimators=100,
                 learning_rate=0.1,
                 max_depth=6,
                 random_state=42
             ),
-            
+
             'Neural Network': MLPClassifier(
                 hidden_layer_sizes=(100, 50),
                 activation='relu',
@@ -82,7 +83,7 @@ class CropRecommendationModels:
                 max_iter=500,
                 random_state=42
             ),
-            
+
             'Naive Bayes': GaussianNB()
         }
         
@@ -165,7 +166,7 @@ class CropRecommendationModels:
                 'kernel': ['rbf', 'poly']
             }
             model = SVC(random_state=42, probability=True)
-            
+
         elif model_name == 'Gradient Boosting':
             param_grid = {
                 'n_estimators': [50, 100, 200],
@@ -173,7 +174,8 @@ class CropRecommendationModels:
                 'max_depth': [3, 5, 7]
             }
             model = GradientBoostingClassifier(random_state=42)
-        
+
+
         else:
             print(f"Hyperparameter tuning not implemented for {model_name}")
             return None

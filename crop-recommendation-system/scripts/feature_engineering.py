@@ -4,6 +4,12 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.feature_selection import SelectKBest, f_classif, mutual_info_classif
 import pickle
 
+
+def drop_constant_columns(df):
+    """Remove columns with constant values"""
+    return df.loc[:, df.nunique() > 1]
+
+
 def create_feature_combinations(df):
     """Create new features from existing ones"""
     print("Creating feature combinations...")
@@ -13,36 +19,38 @@ def create_feature_combinations(df):
     df['NP_ratio'] = df['N'] / (df['P'] + 1e-8)  # Add small value to avoid division by zero
     df['NK_ratio'] = df['N'] / (df['K'] + 1e-8)
     df['PK_ratio'] = df['P'] / (df['K'] + 1e-8)
-    
+
     # Create climate comfort indices
-    df['temp_humidity_index'] = df['temperature'] * df['humidity'] / 100
-    df['rainfall_humidity_index'] = df['rainfall'] * df['humidity'] / 100
+    # df['temp_humidity_index'] = df['temperature'] * df['humidity'] / 100
+    # df['rainfall_humidity_index'] = df['rainfall'] * df['humidity'] / 100
     
     # Create soil quality indicators
-    df['ph_category'] = pd.cut(df['ph'], bins=[0, 6.0, 7.5, 14], labels=['acidic', 'neutral', 'alkaline'])
+    # df['ph_category'] = pd.cut(df['ph'], bins=[0, 6.0, 7.5, 14], labels=['acidic', 'neutral', 'alkaline'])
     df['ph_acidic'] = (df['ph'] < 6.0).astype(int)
     df['ph_neutral'] = ((df['ph'] >= 6.0) & (df['ph'] <= 7.5)).astype(int)
     df['ph_alkaline'] = (df['ph'] > 7.5).astype(int)
     
     # Create temperature categories
-    df['temp_category'] = pd.cut(df['temperature'], 
-                                bins=[0, 15, 25, 35, 50], 
-                                labels=['cold', 'moderate', 'warm', 'hot'])
+    #df['temp_category'] = pd.cut(df['temperature'],
+    #                            bins=[0, 15, 25, 35, 50],
+    #                            labels=['cold', 'moderate', 'warm', 'hot'])
     df['temp_cold'] = (df['temperature'] < 15).astype(int)
     df['temp_moderate'] = ((df['temperature'] >= 15) & (df['temperature'] < 25)).astype(int)
     df['temp_warm'] = ((df['temperature'] >= 25) & (df['temperature'] < 35)).astype(int)
     df['temp_hot'] = (df['temperature'] >= 35).astype(int)
     
     # Create rainfall categories
-    df['rainfall_category'] = pd.cut(df['rainfall'], 
-                                   bins=[0, 50, 100, 200, 300], 
-                                   labels=['low', 'moderate', 'high', 'very_high'])
+    #df['rainfall_category'] = pd.cut(df['rainfall'],
+     #                              bins=[0, 50, 100, 200, 300],
+     #                              labels=['low', 'moderate', 'high', 'very_high'])
     df['rainfall_low'] = (df['rainfall'] < 50).astype(int)
     df['rainfall_moderate'] = ((df['rainfall'] >= 50) & (df['rainfall'] < 100)).astype(int)
     df['rainfall_high'] = ((df['rainfall'] >= 100) & (df['rainfall'] < 200)).astype(int)
     df['rainfall_very_high'] = (df['rainfall'] >= 200).astype(int)
     
-    print(f"Created {df.shape[1] - 8} new features")  # 8 original features including label
+    print(f"Created {df.shape[1] - 7} new features")  # 7 original features including label
+    print(df.info())
+    print(df.head())
     return df
 
 def select_best_features(X, y, k=15):
@@ -55,7 +63,7 @@ def select_best_features(X, y, k=15):
     
     # Get selected feature names
     selected_features = X.columns[selector.get_support()].tolist()
-    
+
     # Get feature scores
     feature_scores = pd.DataFrame({
         'feature': X.columns,
@@ -67,6 +75,7 @@ def select_best_features(X, y, k=15):
     print(feature_scores.head(10))
     
     return X_selected, selected_features, selector, feature_scores
+
 
 def scale_features(X_train, X_test, method='standard'):
     """Scale features using different methods"""
@@ -122,6 +131,11 @@ def main():
     X_train_numeric = X_train_enhanced.drop(columns=categorical_cols, errors='ignore')
     X_test_numeric = X_test_enhanced.drop(columns=categorical_cols, errors='ignore')
     
+     # Drop constant columns
+    # X_train_numeric = drop_constant_columns(X_train_numeric)
+    # X_test_numeric = X_test_numeric[X_train_numeric.columns]  # Ensure same columns
+
+
     print(f"Enhanced feature set shape: {X_train_numeric.shape}")
     
     # Feature selection
@@ -152,6 +166,7 @@ def main():
     print("\nFeature Engineering completed successfully!")
     print(f"Final feature set: {len(selected_features)} features")
     print(f"Selected features: {selected_features}")
+
 
 if __name__ == "__main__":
     main()
