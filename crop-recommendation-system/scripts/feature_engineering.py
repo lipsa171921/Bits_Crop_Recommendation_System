@@ -26,6 +26,7 @@ def create_feature_combinations(df):
     
     # Create soil quality indicators
     # df['ph_category'] = pd.cut(df['ph'], bins=[0, 6.0, 7.5, 14], labels=['acidic', 'neutral', 'alkaline'])
+
     df['ph_acidic'] = (df['ph'] < 6.0).astype(int)
     df['ph_neutral'] = ((df['ph'] >= 6.0) & (df['ph'] <= 7.5)).astype(int)
     df['ph_alkaline'] = (df['ph'] > 7.5).astype(int)
@@ -43,6 +44,7 @@ def create_feature_combinations(df):
     #df['rainfall_category'] = pd.cut(df['rainfall'],
      #                              bins=[0, 50, 100, 200, 300],
      #                              labels=['low', 'moderate', 'high', 'very_high'])
+
     df['rainfall_low'] = (df['rainfall'] < 50).astype(int)
     df['rainfall_moderate'] = ((df['rainfall'] >= 50) & (df['rainfall'] < 100)).astype(int)
     df['rainfall_high'] = ((df['rainfall'] >= 100) & (df['rainfall'] < 200)).astype(int)

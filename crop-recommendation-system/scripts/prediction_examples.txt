@@ -1,18 +1,18 @@
 CROP RECOMMENDATION PREDICTION EXAMPLES
-Model: Random Forest
+Model: Support Vector Machine
 ============================================================
 
 Example 1:
 Actual Crop: jowar
-Predicted Crop: jute
+Predicted Crop: rice
 Correct: False
 Features:
   N: 0.182
   P: -0.302
   K: -0.113
-  ph: 0.046
-  rainfall: 0.733
-  temperature: 0.441
+  ph: 0.130
+  rainfall: -0.119
+  temperature: 0.630
   NPK_sum: -0.107
   NP_ratio: -0.482
   NK_ratio: -1.357
@@ -23,121 +23,13 @@ Features:
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  jute: 0.557
-  rice: 0.376
-  jowar: 0.067
+  rice: 0.623
+  jowar: 0.292
+  jute: 0.070
 
 ----------------------------------------
 
 Example 2:
-Actual Crop: rapeseed
-Predicted Crop: rapeseed
-Correct: True
-Features:
-  N: -0.535
-  P: -0.302
-  K: -0.783
-  ph: -0.797
-  rainfall: -0.808
-  temperature: -3.201
-  NPK_sum: -0.738
-  NP_ratio: 0.870
-  NK_ratio: 0.270
-  PK_ratio: -0.203
-  temp_hot: 0.000
-  rainfall_low: 0.000
-  rainfall_moderate: 0.000
-  rainfall_high: 0.000
-  rainfall_very_high: 0.000
-Top 3 Predictions:
-  rapeseed: 1.000
-  blackgram: 0.000
-  sweetpotato: 0.000
-
-----------------------------------------
-
-Example 3:
-Actual Crop: wheat
-Predicted Crop: wheat
-Correct: True
-Features:
-  N: -0.296
-  P: -0.958
-  K: -0.448
-  ph: 2.196
-  rainfall: -1.175
-  temperature: -0.688
-  NPK_sum: -0.776
-  NP_ratio: 0.037
-  NK_ratio: 0.254
-  PK_ratio: 0.367
-  temp_hot: 0.000
-  rainfall_low: 0.000
-  rainfall_moderate: 0.000
-  rainfall_high: 0.000
-  rainfall_very_high: 0.000
-Top 3 Predictions:
-  wheat: 1.000
-  turmeric: 0.000
-  jackfruit: 0.000
-
-----------------------------------------
-
-Example 4:
-Actual Crop: sunflower
-Predicted Crop: sunflower
-Correct: True
-Features:
-  N: -0.535
-  P: 1.009
-  K: -0.448
-  ph: -0.418
-  rainfall: -0.197
-  temperature: 0.042
-  NPK_sum: 0.012
-  NP_ratio: -0.442
-  NK_ratio: 0.633
-  PK_ratio: -1.062
-  temp_hot: 0.000
-  rainfall_low: 0.000
-  rainfall_moderate: 0.000
-  rainfall_high: 0.000
-  rainfall_very_high: 0.000
-Top 3 Predictions:
-  sunflower: 1.000
-  pumpkin: 0.000
-  cardamom: 0.000
-
-----------------------------------------
-
-Example 5:
-Actual Crop: cotton
-Predicted Crop: cotton
-Correct: True
-Features:
-  N: 1.136
-  P: -0.302
-  K: -0.783
-  ph: -0.165
-  rainfall: -0.243
-  temperature: 1.593
-  NPK_sum: 0.023
-  NP_ratio: -2.284
-  NK_ratio: -1.250
-  PK_ratio: -0.203
-  temp_hot: 0.000
-  rainfall_low: 0.000
-  rainfall_moderate: 0.000
-  rainfall_high: 0.000
-  rainfall_very_high: 0.000
-Top 3 Predictions:
-  cotton: 1.000
-  pumpkin: 0.000
-  jowar: 0.000
-
-----------------------------------------
-
-Example 6:
 Actual Crop: sweetpotato
 Predicted Crop: sweetpotato
 Correct: True
@@ -145,9 +37,9 @@ Features:
   N: 0.420
   P: -1.613
   K: 2.566
-  ph: -0.882
-  rainfall: 0.518
-  temperature: 0.390
+  ph: -1.050
+  rainfall: 2.400
+  temperature: -0.491
   NPK_sum: 0.626
   NP_ratio: -0.288
   NK_ratio: -0.099
@@ -158,23 +50,50 @@ Features:
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  sweetpotato: 1.000
-  wheat: 0.000
-  cauliflower: 0.000
+  sweetpotato: 0.919
+  turmeric: 0.009
+  rice: 0.008
 
 ----------------------------------------
 
-Example 7:
-Actual Crop: jute
+Example 3:
+Actual Crop: potato
+Predicted Crop: potato
+Correct: True
+Features:
+  N: 2.568
+  P: 1.009
+  K: 1.561
+  ph: -0.840
+  rainfall: -0.925
+  temperature: -2.345
+  NPK_sum: 2.342
+  NP_ratio: 1.314
+  NK_ratio: 0.956
+  PK_ratio: -0.119
+  temp_hot: 0.000
+  rainfall_low: 0.000
+  rainfall_moderate: 0.000
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  potato: 0.956
+  onion: 0.007
+  rice: 0.003
+
+----------------------------------------
+
+Example 4:
+Actual Crop: rice
 Predicted Crop: rice
-Correct: False
+Correct: True
 Features:
   N: 0.182
   P: -0.302
   K: -0.113
-  ph: 0.046
-  rainfall: -0.862
-  temperature: 0.056
+  ph: -0.081
+  rainfall: -0.101
+  temperature: -0.837
   NPK_sum: -0.107
   NP_ratio: -0.482
   NK_ratio: -1.357
@@ -185,121 +104,148 @@ Features:
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  rice: 0.873
-  jowar: 0.112
-  jute: 0.015
+  rice: 0.629
+  jowar: 0.293
+  jute: 0.063
+
+----------------------------------------
+
+Example 5:
+Actual Crop: onion
+Predicted Crop: onion
+Correct: True
+Features:
+  N: 1.136
+  P: 1.009
+  K: 0.724
+  ph: 0.678
+  rainfall: -0.119
+  temperature: 0.630
+  NPK_sum: 1.307
+  NP_ratio: 0.504
+  NK_ratio: 0.902
+  PK_ratio: 0.125
+  temp_hot: 0.000
+  rainfall_low: 0.000
+  rainfall_moderate: 0.000
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  onion: 0.957
+  potato: 0.004
+  cabbage: 0.003
+
+----------------------------------------
+
+Example 6:
+Actual Crop: onion
+Predicted Crop: onion
+Correct: True
+Features:
+  N: 1.136
+  P: 1.009
+  K: 0.724
+  ph: 1.142
+  rainfall: 2.400
+  temperature: -0.491
+  NPK_sum: 1.307
+  NP_ratio: 0.504
+  NK_ratio: 0.902
+  PK_ratio: 0.125
+  temp_hot: 0.000
+  rainfall_low: 0.000
+  rainfall_moderate: 0.000
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  onion: 0.929
+  rice: 0.006
+  potato: 0.006
+
+----------------------------------------
+
+Example 7:
+Actual Crop: ragi
+Predicted Crop: ragi
+Correct: True
+Features:
+  N: -0.535
+  P: -0.302
+  K: -0.783
+  ph: -0.502
+  rainfall: -0.197
+  temperature: 0.042
+  NPK_sum: -0.738
+  NP_ratio: 0.870
+  NK_ratio: 0.270
+  PK_ratio: -0.203
+  temp_hot: 0.000
+  rainfall_low: 0.000
+  rainfall_moderate: 0.000
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  ragi: 0.935
+  rapeseed: 0.043
+  moong: 0.002
 
 ----------------------------------------
 
 Example 8:
-Actual Crop: wheat
-Predicted Crop: wheat
+Actual Crop: grapes
+Predicted Crop: grapes
 Correct: True
 Features:
-  N: -0.296
-  P: -0.958
-  K: -0.448
-  ph: 1.163
-  rainfall: -1.062
-  temperature: -0.619
-  NPK_sum: -0.776
-  NP_ratio: 0.037
-  NK_ratio: 0.254
-  PK_ratio: 0.367
+  N: -1.251
+  P: 5.269
+  K: 5.246
+  ph: -3.454
+  rainfall: -0.019
+  temperature: 0.060
+  NPK_sum: 4.222
+  NP_ratio: -0.275
+  NK_ratio: -0.386
+  PK_ratio: -0.002
   temp_hot: 0.000
   rainfall_low: 0.000
   rainfall_moderate: 0.000
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  wheat: 1.000
-  coriander: 0.000
-  turmeric: 0.000
+  grapes: 0.377
+  rice: 0.061
+  potato: 0.050
 
 ----------------------------------------
 
 Example 9:
-Actual Crop: moong
-Predicted Crop: moong
+Actual Crop: potato
+Predicted Crop: potato
 Correct: True
 Features:
-  N: -1.251
-  P: -0.302
-  K: -0.783
-  ph: 0.046
-  rainfall: -0.523
-  temperature: 1.739
-  NPK_sum: -1.065
-  NP_ratio: 2.221
-  NK_ratio: 0.921
-  PK_ratio: -0.203
+  N: 2.568
+  P: 1.009
+  K: 1.561
+  ph: -1.261
+  rainfall: -0.876
+  temperature: -0.986
+  NPK_sum: 2.342
+  NP_ratio: 1.314
+  NK_ratio: 0.956
+  PK_ratio: -0.119
   temp_hot: 0.000
   rainfall_low: 0.000
   rainfall_moderate: 0.000
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  moong: 1.000
-  wheat: 0.000
-  jowar: 0.000
+  potato: 0.966
+  onion: 0.004
+  blackpepper: 0.003
 
 ----------------------------------------
 
 Example 10:
-Actual Crop: brinjal
-Predicted Crop: brinjal
-Correct: True
-Features:
-  N: 0.182
-  P: -1.941
-  K: -0.113
-  ph: 1.775
-  rainfall: 3.478
-  temperature: 0.355
-  NPK_sum: -0.853
-  NP_ratio: -0.193
-  NK_ratio: -1.357
-  PK_ratio: 5.245
-  temp_hot: 0.000
-  rainfall_low: 0.000
-  rainfall_moderate: 0.000
-  rainfall_high: 0.000
-  rainfall_very_high: 0.000
-Top 3 Predictions:
-  brinjal: 0.972
-  ladyfinger: 0.020
-  bittergourd: 0.006
-
-----------------------------------------
-
-Example 11:
-Actual Crop: cotton
-Predicted Crop: cotton
-Correct: True
-Features:
-  N: 1.136
-  P: -0.302
-  K: -0.783
-  ph: 0.088
-  rainfall: -1.202
-  temperature: 0.576
-  NPK_sum: 0.023
-  NP_ratio: -2.284
-  NK_ratio: -1.250
-  PK_ratio: -0.203
-  temp_hot: 0.000
-  rainfall_low: 0.000
-  rainfall_moderate: 0.000
-  rainfall_high: 0.000
-  rainfall_very_high: 0.000
-Top 3 Predictions:
-  cotton: 0.953
-  barley: 0.010
-  sunflower: 0.010
-
-----------------------------------------
-
-Example 12:
 Actual Crop: maize
 Predicted Crop: maize
 Correct: True
@@ -307,9 +253,9 @@ Features:
   N: 0.182
   P: -0.302
   K: -0.783
-  ph: -0.502
-  rainfall: 0.264
-  temperature: 0.303
+  ph: -0.038
+  rainfall: 0.707
+  temperature: 0.380
   NPK_sum: -0.412
   NP_ratio: -0.482
   NK_ratio: -0.381
@@ -320,50 +266,104 @@ Features:
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  maize: 1.000
-  wheat: 0.000
-  jowar: 0.000
+  maize: 0.983
+  rice: 0.002
+  jowar: 0.002
 
 ----------------------------------------
 
-Example 13:
-Actual Crop: cotton
-Predicted Crop: cotton
+Example 11:
+Actual Crop: potato
+Predicted Crop: potato
 Correct: True
 Features:
-  N: 1.136
-  P: -0.302
-  K: -0.783
-  ph: 0.172
-  rainfall: 0.866
-  temperature: -0.722
-  NPK_sum: 0.023
-  NP_ratio: -2.284
-  NK_ratio: -1.250
-  PK_ratio: -0.203
+  N: 2.568
+  P: 1.009
+  K: 1.561
+  ph: -0.840
+  rainfall: 0.641
+  temperature: 0.505
+  NPK_sum: 2.342
+  NP_ratio: 1.314
+  NK_ratio: 0.956
+  PK_ratio: -0.119
   temp_hot: 0.000
   rainfall_low: 0.000
   rainfall_moderate: 0.000
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  cotton: 1.000
-  papaya: 0.000
-  wheat: 0.000
+  potato: 0.972
+  onion: 0.004
+  blackpepper: 0.002
+
+----------------------------------------
+
+Example 12:
+Actual Crop: mango
+Predicted Crop: mango
+Correct: True
+Features:
+  N: -1.251
+  P: -1.613
+  K: -0.448
+  ph: -1.219
+  rainfall: 0.641
+  temperature: 0.505
+  NPK_sum: -1.509
+  NP_ratio: 0.303
+  NK_ratio: 1.771
+  PK_ratio: 0.843
+  temp_hot: 0.000
+  rainfall_low: 0.000
+  rainfall_moderate: 0.000
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  mango: 0.794
+  rapeseed: 0.026
+  moong: 0.016
+
+----------------------------------------
+
+Example 13:
+Actual Crop: onion
+Predicted Crop: onion
+Correct: True
+Features:
+  N: 1.136
+  P: 1.009
+  K: 0.724
+  ph: 0.889
+  rainfall: 0.953
+  temperature: 0.073
+  NPK_sum: 1.307
+  NP_ratio: 0.504
+  NK_ratio: 0.902
+  PK_ratio: 0.125
+  temp_hot: 0.000
+  rainfall_low: 0.000
+  rainfall_moderate: 0.000
+  rainfall_high: 0.000
+  rainfall_very_high: 0.000
+Top 3 Predictions:
+  onion: 0.962
+  cabbage: 0.004
+  potato: 0.003
 
 ----------------------------------------
 
 Example 14:
 Actual Crop: rice
-Predicted Crop: jowar
-Correct: False
+Predicted Crop: rice
+Correct: True
 Features:
   N: 0.182
   P: -0.302
   K: -0.113
-  ph: 0.046
-  rainfall: 0.866
-  temperature: -0.722
+  ph: -0.123
+  rainfall: -0.904
+  temperature: 0.617
   NPK_sum: -0.107
   NP_ratio: -0.482
   NK_ratio: -1.357
@@ -374,36 +374,36 @@ Features:
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  jowar: 0.682
-  rice: 0.315
-  jute: 0.003
+  rice: 0.618
+  jowar: 0.289
+  jute: 0.075
 
 ----------------------------------------
 
 Example 15:
-Actual Crop: barley
-Predicted Crop: barley
+Actual Crop: potato
+Predicted Crop: potato
 Correct: True
 Features:
-  N: -0.057
-  P: -0.302
-  K: 0.054
-  ph: -0.376
-  rainfall: -1.085
-  temperature: -0.527
-  NPK_sum: -0.139
-  NP_ratio: -0.031
-  NK_ratio: -0.969
-  PK_ratio: -2.149
+  N: 2.568
+  P: 1.009
+  K: 1.561
+  ph: -1.093
+  rainfall: -0.282
+  temperature: 0.484
+  NPK_sum: 2.342
+  NP_ratio: 1.314
+  NK_ratio: 0.956
+  PK_ratio: -0.119
   temp_hot: 0.000
   rainfall_low: 0.000
   rainfall_moderate: 0.000
   rainfall_high: 0.000
   rainfall_very_high: 0.000
 Top 3 Predictions:
-  barley: 1.000
-  pumpkin: 0.000
-  cauliflower: 0.000
+  potato: 0.968
+  onion: 0.004
+  blackpepper: 0.002
 
 ----------------------------------------
 

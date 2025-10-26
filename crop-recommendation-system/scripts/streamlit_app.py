@@ -506,8 +506,6 @@ def show_enhanced_home_page(app, selected_model):
                     feature_values[feature] = st.slider(f"{info['name']}", 5, 205, 48, key=f"slider_{feature}")
                 elif 'temp' in feature.lower():
                     feature_values[feature] = st.slider(f"{info['name']}", 8.8, 43.7, 25.6, key=f"slider_{feature}")
-                elif 'humid' in feature.lower():
-                    feature_values[feature] = st.slider(f"{info['name']}", 14.3, 99.9, 71.5, key=f"slider_{feature}")
                 elif 'ph' in feature.lower():
                     feature_values[feature] = st.slider(f"{info['name']}", 3.5, 9.9, 6.5, 0.1, key=f"slider_{feature}")
                 elif 'rain' in feature.lower():
@@ -606,8 +604,6 @@ def show_enhanced_home_page(app, selected_model):
                 max_val = 205
             elif 'temp' in feature.lower():
                 max_val = 44
-            elif 'humid' in feature.lower():
-                max_val = 100
             elif 'ph' in feature.lower():
                 max_val = 10
             elif 'rain' in feature.lower():
@@ -771,7 +767,7 @@ def show_enhanced_model_comparison():
         sorted_df = comparison_df.sort_values('Test_Accuracy', ascending=False)
         
         for i, (_, row) in enumerate(sorted_df.iterrows()):
-            rank_color = "#FFD700" if i == 0 else "#C0C0C0" if i == 1 else "#CD7F32" if i == 2 else "#2E8B57"
+            rank_color = "#00FF00" if i == 0 else "#0000FF" if i == 1 else "#FFA500" if i == 2 else "#FF0000"
             st.markdown(f"""
             <div class="metric-card" style="border-left: 5px solid {rank_color};">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -959,53 +955,295 @@ def show_model_insights_page(app):
 
 def get_crop_emoji(crop_name):
     """Get emoji for crop visualization"""
+
     crop_emojis = {
-        'rice': '🌾', 'wheat': '🌾', 'maize': '🌽', 'corn': '🌽',
-        'cotton': '🌿', 'banana': '🍌', 'apple': '🍎', 'mango': '🥭',
-        'grapes': '🍇', 'coffee': '☕', 'chickpea': '🫘', 'lentil': '🫘'
+        'banana': '🍌',
+        'barley': '🌾',
+        'bittergourd': '🥒',
+        'blackgram': '🫘',
+        'blackpepper': '🌶️',
+        'bottlegourd': '🎃',
+        'brinjal': '🍆',
+        'cabbage': '🥬',
+        'cardamom': '🌿',
+        'cauliflower': '🥦',
+        'coriander': '🌿',
+        'cotton': '🧵',
+        'cucumber': '🥒',
+        'drumstick': '🌳',
+        'garlic': '🧄',
+        'grapes': '🍇',
+        'horsegram': '🫘',
+        'jackfruit': '🍈',
+        'jowar': '🌾',
+        'jute': '🧶',
+        'ladyfinger': '🥒',
+        'maize': '🌽',
+        'mango': '🥭',
+        'moong': '🫘',
+        'onion': '🧅',
+        'orange': '🍊',
+        'papaya': '🥭',
+        'pineapple': '🍍',
+        'potato': '🥔',
+        'pumpkin': '🎃',
+        'radish': '🥕',
+        'ragi': '🌾',
+        'rapeseed': '🌻',
+        'rice': '🌾',
+        'soyabean': '🫘',
+        'sunflower': '🌻',
+        'sweetpotato': '🍠',
+        'tomato': '🍅',
+        'turmeric': '🪶',
+        'wheat': '🌾'
     }
     return crop_emojis.get(crop_name.lower(), '🌱')
 
 def get_dynamic_crop_info(crop_name, available_crops):
     """Get dynamic crop information"""
     crop_database = {
-        'rice': {
-            'season': 'Kharif',
-            'water_req': 'High',
-            'soil_type': 'Clay loam',
-            'tips': 'Requires flooded fields, warm climate, and high humidity'
-        },
-        'maize': {
-            'season': 'Kharif/Rabi',
-            'water_req': 'Medium',
-            'soil_type': 'Well-drained loam',
-            'tips': 'Needs warm weather and adequate rainfall during growing season'
-        },
-        'cotton': {
-            'season': 'Kharif',
-            'water_req': 'Medium',
-            'soil_type': 'Black cotton soil',
-            'tips': 'Requires long warm season, moderate rainfall'
-        },
-        'chickpea': {
-            'season': 'Rabi',
-            'water_req': 'Low',
-            'soil_type': 'Sandy loam',
-            'tips': 'Cool weather crop, drought tolerant, fixes nitrogen'
-        },
-        'coffee': {
-            'season': 'Perennial',
-            'water_req': 'High',
-            'soil_type': 'Well-drained, rich soil',
-            'tips': 'Requires shade, consistent rainfall, and cool temperatures'
-        },
-        'banana': {
-            'season': 'Year-round',
-            'water_req': 'High',
-            'soil_type': 'Rich, well-drained',
-            'tips': 'Needs warm climate, high humidity, and protection from wind'
-        }
+    'banana': {
+        'season': 'Year-round',
+        'water_req': 'High',
+        'soil_type': 'Rich, well-drained loamy soil',
+        'tips': 'Requires warm climate, high humidity, and protection from strong winds.'
+    },
+    'barley': {
+        'season': 'Rabi',
+        'water_req': 'Low',
+        'soil_type': 'Well-drained loamy to clay loam soil',
+        'tips': 'Prefers cool, dry climate; avoid waterlogging; suitable for irrigated and rainfed areas.'
+    },
+    'bittergourd': {
+        'season': 'Kharif/Summer',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained sandy loam soil',
+        'tips': 'Needs warm weather and regular irrigation; support vines on trellis for better yield.'
+    },
+    'blackgram': {
+        'season': 'Kharif/Rabi/Summer',
+        'water_req': 'Low',
+        'soil_type': 'Fertile loamy soil with good drainage',
+        'tips': 'Fixes nitrogen in soil; grows well under moderate rainfall and warm climate.'
+    },
+    'blackpepper': {
+        'season': 'Perennial',
+        'water_req': 'High',
+        'soil_type': 'Well-drained red loam or laterite soil rich in organic matter',
+        'tips': 'Requires partial shade, humid conditions, and good staking for vine support.'
+    },
+    'bottlegourd': {
+        'season': 'Kharif/Summer',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained sandy loam soil rich in organic matter',
+        'tips': 'Prefers warm climate; train vines properly and irrigate regularly during fruiting.'
+    },
+    'brinjal': {
+        'season': 'Kharif/Rabi/Summer',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained fertile loam',
+        'tips': 'Grows best in warm climate; avoid frost; requires regular irrigation and pest management.'
+    },
+    'cabbage': {
+        'season': 'Rabi',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained loamy soil rich in organic matter',
+        'tips': 'Thrives in cool climate; frequent irrigation and pest control improve head formation.'
+    },
+    'cardamom': {
+        'season': 'Perennial',
+        'water_req': 'High',
+        'soil_type': 'Well-drained forest loam rich in humus',
+        'tips': 'Needs shade, high humidity, and regular rainfall; ideal for hilly areas with forest cover.'
+    },
+    'cauliflower': {
+        'season': 'Rabi',
+        'water_req': 'Medium',
+        'soil_type': 'Loamy soil rich in organic matter with good moisture',
+        'tips': 'Cool-season crop; requires steady moisture and well-timed transplanting for compact curds.'
+    },
+    'coriander': {
+        'season': 'Rabi',
+        'water_req': 'Low to Medium',
+        'soil_type': 'Well-drained loamy soil rich in organic matter',
+        'tips': 'Prefers cool climate; irrigate lightly; harvest before flowering for best flavor.'
+    },
+    'cotton': {
+        'season': 'Kharif',
+        'water_req': 'Medium',
+        'soil_type': 'Deep black cotton soil',
+        'tips': 'Requires long frost-free season and moderate rainfall; avoid waterlogging.'
+    },
+    'cucumber': {
+        'season': 'Kharif/Summer',
+        'water_req': 'Medium to High',
+        'soil_type': 'Sandy loam rich in organic matter',
+        'tips': 'Needs warm climate; ensure regular watering; trellising helps increase fruit quality.'
+    },
+    'drumstick': {
+        'season': 'Year-round',
+        'water_req': 'Low',
+        'soil_type': 'Well-drained sandy loam',
+        'tips': 'Drought-resistant; prune regularly for better pod production; prefers warm climate.'
+    },
+    'garlic': {
+        'season': 'Rabi',
+        'water_req': 'Low to Medium',
+        'soil_type': 'Loose loamy soil rich in organic matter',
+        'tips': 'Cool-season crop; requires well-drained soil and adequate spacing for bulb formation.'
+    },
+    'grapes': {
+        'season': 'Perennial',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained sandy loam or clay loam with good organic content',
+        'tips': 'Requires dry climate during ripening; proper pruning and training increase yield.'
+    },
+    'horsegram': {
+        'season': 'Kharif/Rabi',
+        'water_req': 'Low',
+        'soil_type': 'Well-drained light loam or sandy soil',
+        'tips': 'Excellent drought-tolerant pulse; improves soil fertility by nitrogen fixation.'
+    },
+    'jackfruit': {
+        'season': 'Perennial',
+        'water_req': 'High',
+        'soil_type': 'Deep, well-drained loamy soil',
+        'tips': 'Prefers warm, humid climate; protect from frost; requires regular watering during fruiting.'
+    },
+    'jowar': {
+        'season': 'Kharif/Rabi',
+        'water_req': 'Low to Medium',
+        'soil_type': 'Well-drained sandy loam to clay loam soil',
+        'tips': 'Tolerant to drought; suitable for dryland farming; thrives in warm climate.'
+    },
+    'jute': {
+        'season': 'Kharif',
+        'water_req': 'High',
+        'soil_type': 'Clay loam soil with good water retention',
+        'tips': 'Needs high temperature and humidity; ensure adequate rainfall for fiber quality.'
+    },
+    'ladyfinger': {
+        'season': 'Kharif/Summer',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained loamy soil rich in organic matter',
+        'tips': 'Prefers warm climate; avoid frost; regular irrigation promotes tender pods.'
+    },
+    'maize': {
+        'season': 'Kharif/Rabi',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained loam or sandy loam soil',
+        'tips': 'Requires warm weather and good sunlight; irrigate regularly during flowering.'
+    },
+    'mango': {
+        'season': 'Perennial',
+        'water_req': 'Medium',
+        'soil_type': 'Deep, well-drained loamy soil',
+        'tips': 'Requires dry weather during flowering and fruiting; avoid waterlogging; prune after harvest.'
+    },
+    'moong': {
+        'season': 'Kharif/Summer',
+        'water_req': 'Low',
+        'soil_type': 'Well-drained sandy loam',
+        'tips': 'Short-duration pulse; drought-tolerant; improves soil nitrogen content.'
+    },
+    'onion': {
+        'season': 'Rabi/Kharif',
+        'water_req': 'Medium',
+        'soil_type': 'Fertile, well-drained loamy soil rich in organic matter',
+        'tips': 'Needs cool weather for vegetative growth and dry conditions for bulb maturity.'
+    },
+    'orange': {
+        'season': 'Perennial',
+        'water_req': 'High',
+        'soil_type': 'Well-drained sandy loam with good organic matter',
+        'tips': 'Prefers subtropical climate; regular irrigation and pruning improve fruit yield.'
+    },
+    'papaya': {
+        'season': 'Year-round',
+        'water_req': 'High',
+        'soil_type': 'Well-drained, fertile loam soil',
+        'tips': 'Requires warm climate; irrigate regularly; remove male plants in dioecious varieties.'
+    },
+    'pineapple': {
+        'season': 'Year-round',
+        'water_req': 'Medium to High',
+        'soil_type': 'Sandy loam with good drainage',
+        'tips': 'Prefers humid tropical climate; avoid waterlogging; mulching helps conserve soil moisture.'
+    },
+    'potato': {
+        'season': 'Rabi',
+        'water_req': 'Medium to High',
+        'soil_type': 'Well-drained loamy soil rich in organic matter',
+        'tips': 'Cool-season crop; requires regular irrigation; avoid waterlogging to prevent tuber rot.'
+    },
+    'pumpkin': {
+        'season': 'Kharif/Summer',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained sandy loam rich in organic matter',
+        'tips': 'Prefers warm weather; provide support for vines; consistent watering ensures uniform fruits.'
+    },
+    'radish': {
+        'season': 'Rabi/Summer',
+        'water_req': 'Low to Medium',
+        'soil_type': 'Loose, well-drained sandy loam soil',
+        'tips': 'Cool-season crop; harvest young roots for best quality; ensure regular light irrigation.'
+    },
+    'ragi': {
+        'season': 'Kharif/Rabi',
+        'water_req': 'Low',
+        'soil_type': 'Well-drained loamy or lateritic soil',
+        'tips': 'Highly drought-tolerant millet; suitable for dry regions; thrives in moderate rainfall.'
+    },
+    'rapeseed': {
+        'season': 'Rabi',
+        'water_req': 'Low to Medium',
+        'soil_type': 'Fertile loamy soil with good drainage',
+        'tips': 'Cool-season oilseed crop; avoid excess moisture; timely sowing ensures higher yield.'
+    },
+    'rice': {
+        'season': 'Kharif',
+        'water_req': 'High',
+        'soil_type': 'Clay loam with good water retention',
+        'tips': 'Needs flooded fields, warm climate, and high humidity; continuous standing water during growth.'
+    },
+    'soyabean': {
+        'season': 'Kharif',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained loam to clay loam soil',
+        'tips': 'Fixes atmospheric nitrogen; avoid waterlogging; suitable for rainfed and irrigated areas.'
+    },
+    'sunflower': {
+        'season': 'Kharif/Rabi',
+        'water_req': 'Medium',
+        'soil_type': 'Fertile, well-drained loamy soil',
+        'tips': 'Requires plenty of sunlight; avoid excessive irrigation; rotates well with cereals.'
+    },
+    'sweetpotato': {
+        'season': 'Kharif/Rabi',
+        'water_req': 'Medium',
+        'soil_type': 'Sandy loam with good drainage',
+        'tips': 'Prefers warm climate; use vine cuttings for planting; irrigate regularly for uniform tubers.'
+    },
+    'tomato': {
+        'season': 'Kharif/Rabi/Summer',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained loamy soil rich in organic matter',
+        'tips': 'Requires warm weather and regular irrigation; staking and pest control improve yield.'
+    },
+    'turmeric': {
+        'season': 'Kharif',
+        'water_req': 'High',
+        'soil_type': 'Well-drained loamy or alluvial soil rich in humus',
+        'tips': 'Prefers warm, humid climate; needs frequent irrigation and shade; harvest after 8–9 months.'
+    },
+    'wheat': {
+        'season': 'Rabi',
+        'water_req': 'Medium',
+        'soil_type': 'Well-drained loamy or clay loam soil',
+        'tips': 'Cool-season crop; requires irrigation at critical stages like crown root and flowering.'
     }
+}
     
     # Return specific info if available, otherwise generic info
     if crop_name.lower() in crop_database:

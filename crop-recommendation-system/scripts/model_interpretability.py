@@ -23,9 +23,11 @@ class ModelInterpreter:
         
         # Load best performing models
         model_files = {
+            'Support Vector Machine': 'crop_model_support_vector_machine.pkl',
             'Random Forest': 'crop_model_random_forest.pkl',
             'Gradient Boosting': 'crop_model_gradient_boosting.pkl',
-            'Decision Tree': 'crop_model_decision_tree.pkl'
+            'Neural Network': 'crop_model_neural_network.pkl'
+
         }
         
         for name, file in model_files.items():

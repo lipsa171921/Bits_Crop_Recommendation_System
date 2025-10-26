@@ -31,7 +31,7 @@ def load_crop_data():
 
         # Load both datasets
         df = loader.load_data_from_file()
-        print("✅Datasets loaded successfully.")
+        print("Datasets loaded successfully.")
 
         return df, loader  # use combined_df for EDA
 

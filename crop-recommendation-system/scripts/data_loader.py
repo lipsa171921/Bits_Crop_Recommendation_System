@@ -70,7 +70,7 @@ class CropDataLoader:
     def load_both_datasets(self):
         """Load both train and test datasets"""
         try:
-            print("📥 Loading both train and test datasets...")
+            print("Loading both train and test datasets...")
             train_df = self.load_data_from_file(use_test_data=False)
             test_df = self.load_data_from_file(use_test_data=True)
             
@@ -191,12 +191,6 @@ class CropDataLoader:
                     'name': 'Temperature',
                     'unit': '°C',
                     'description': 'Average temperature'
-                }
-            elif 'humid' in feature.lower():
-                feature_info[feature] = {
-                    'name': 'Humidity',
-                    'unit': '%',
-                    'description': 'Relative humidity'
                 }
             elif 'ph' in feature.lower():
                 feature_info[feature] = {

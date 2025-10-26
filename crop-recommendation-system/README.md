@@ -6,15 +6,15 @@ A comprehensive AI-powered agricultural decision support system built with advan
 
 This intelligent crop recommendation system helps farmers make data-driven decisions by analyzing:
 - **Soil Nutrients**: Nitrogen (N), Phosphorus (P), Potassium (K) levels
-- **Climate Conditions**: Temperature, humidity, rainfall patterns  
+- **Climate Conditions**: Temperature, rainfall patterns  
 - **Soil Chemistry**: pH levels and soil composition
 - **Environmental Factors**: Regional climate indices and growing conditions
 
 ## 🚀 Key Features
 
 ### 🤖 Advanced AI Models
-- **6 ML Algorithms**: Random Forest, SVM, Logistic Regression, Decision Tree, Gradient Boosting, Neural Network
-- **95%+ Accuracy**: Highly accurate crop predictions with confidence scoring
+- **8 ML Algorithms**: Random Forest, SVM, Logistic Regression, Decision Tree, Gradient Boosting, Neural Network, Naive Bayes and K-nearest neighbors
+- **90%+ Accuracy**: Highly accurate crop predictions with confidence scoring
 - **Ensemble Methods**: Voting and Stacking classifiers for improved reliability
 - **Feature Engineering**: Advanced NPK ratios, climate indices, and categorical features
 
@@ -66,7 +66,7 @@ python run_complete_pipeline.py
 ### 🏠 Home Page - Get Recommendations
 1. **Input Parameters**: Use interactive sliders to set soil and climate conditions
 2. **Get Prediction**: Click "Get Smart Crop Recommendation" 
-3. **View Results**: See recommended crops with confidence scores
+3. **View Results**: See recommended crops with confidence scores , Alternative recommendation shows top 3 recommended crops with confidence score
 4. **Growing Guide**: Access detailed cultivation information
 
 ### 📊 Data Analysis
@@ -104,7 +104,6 @@ crop-recommendation-system/
 │   ├── model_interpretability.py # 🧠 AI explainability
 │   ├── run_complete_pipeline.py  # 🚀 Complete ML pipeline
 │   ├── requirements.txt          # 📦 Python dependencies
-│   └── README_LOCAL_SETUP.md     # 🔧 Detailed setup guide
 ├── app/
 │   └── page.tsx                  # 🌐 Next.js landing page (redirects to Streamlit)
 └── README.md                     # 📖 This file
@@ -112,7 +111,7 @@ crop-recommendation-system/
 
 ## 🌾 Supported Crops
 
-The system can recommend from **22+ crop types** including:
+The system can recommend from **40 crop types** including:
 - **Cereals**: Rice, Wheat, Maize, Barley
 - **Legumes**: Chickpea, Lentil, Soybean, Kidney Beans
 - **Cash Crops**: Cotton, Sugarcane, Coffee, Tea
@@ -120,16 +119,6 @@ The system can recommend from **22+ crop types** including:
 - **Vegetables**: Potato, Tomato, Onion
 - **Others**: Coconut, Jute, and more
 
-## 📊 Model Performance
-
-| Algorithm | Accuracy | Features |
-|-----------|----------|----------|
-| Random Forest | 95.2% | Best overall performer |
-| Gradient Boosting | 94.8% | Excellent for complex patterns |
-| SVM | 93.5% | Strong generalization |
-| Neural Network | 92.1% | Deep learning approach |
-| Logistic Regression | 89.7% | Fast and interpretable |
-| Decision Tree | 87.3% | Highly interpretable |
 
 ## 🎨 Web Interface Screenshots
 
@@ -142,9 +131,9 @@ The Streamlit application features:
 ## 🔧 Technical Details
 
 ### Machine Learning Pipeline
-1. **Data Loading**: Dynamic CSV loading from URL with automatic feature detection
+1. **Data Loading**: Dynamic CSV loading  with automatic feature detection
 2. **Feature Engineering**: NPK ratios, climate indices, categorical encoding
-3. **Model Training**: 6 algorithms with hyperparameter optimization
+3. **Model Training**: 8 algorithms with hyperparameter optimization
 4. **Evaluation**: Cross-validation, confusion matrices, classification reports
 5. **Deployment**: Real-time prediction API through Streamlit
 
@@ -162,23 +151,11 @@ The Streamlit application features:
 streamlit run streamlit_app.py
 \`\`\`
 
-### Production Deployment
+### Production Deployment (Not Done)
 - **Streamlit Cloud**: Deploy directly from GitHub
 - **Heroku**: Container-based deployment
 - **AWS/GCP**: Cloud platform deployment
 - **Docker**: Containerized deployment
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📝 License
-
-This project is open source and available under the MIT License.
 
 ## 🙏 Acknowledgments
 
@@ -191,4 +168,3 @@ This project is open source and available under the MIT License.
 
 **🌱 Happy Farming! 🌱**
 
-*For technical support or questions, please open an issue in the repository.*
